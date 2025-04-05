@@ -12,4 +12,4 @@
       
   - name: craete user if not exists
     ansible.builtin.command: adduser expense
-    when: USER.rc !==0
+    when: USER.rc !=0
