@@ -1,0 +1,9 @@
+- name: check the user
+  hosts: local
+  become: yes #need root to create user or need executr permision
+  connection: local
+  tasks:
+  - name: Remove the user 'expense'
+    ansible.builtin.user:
+      name: expense
+      state: present
