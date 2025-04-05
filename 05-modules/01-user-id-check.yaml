@@ -1,0 +1,15 @@
+- name: check the user
+  hosts: local
+  connection: local
+  tasks:
+  - name: please check user
+    ansible.builtin.command: id expense
+    ignore_errors: true
+    register: USER
+  - name: read user info
+    ansible.builtin.debug:
+      msg: check the info {{ USER }}
+      
+  - name: craete user if not exists
+    ansible.builtin.command: adduser expense
+    when: USER.rc ! == 0

@@ -1,0 +1,34 @@
+- name: condition to print when true
+  hosts: web
+  vars:
+  - name: my_num
+    prompt: "Please enter the number"
+    private: false
+  tasks:
+  - name: printh the number
+    ansible.builtin.debug:
+      msg: "when the {{ my_num }} number is greater than 10 "
+    when: my_num > 10
+  
+  - name: printh the number
+    ansible.builtin.debug:
+      msg: "when the {{ my_num }} number is greater than 10 "
+    when: my_num < 10
+
+
+# - name: condition to print when true
+#   hosts: web
+#   vars:
+#   - name: my_num
+#     prompt: "Please enter the number"
+#     private: false
+#   tasks:
+#   - name: printh the number
+#     ansible.builtin.debug:
+#       msg: "when the {{ my_num }} number is greater than 10 "
+#     when: my_num | int > 10
+  
+#   - name: printh the number
+#     ansible.builtin.debug:
+#       msg: "when the {{ my_num }} number is greater than 10 "
+#     when: my_num | int < 10

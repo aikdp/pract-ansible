@@ -1,0 +1,23 @@
+- name: Datatypes 
+  hosts: local
+  conection: local
+  vars:
+    course: "DevOps" #key: value 
+    exp: 3
+    topics: #list
+    - Linux
+    - shell
+    - ansible
+    - terraform
+    - docker
+    - K8s
+    - jenkins-cicd
+    live: true
+    tools:  #map
+      cicd: jenkins
+      cm: ansible
+      cloud: "AWS/Azure"
+  tasks:
+  - name: print all the datatypes
+    ansible.builtin.debug:
+      msg: "Hi I am {{ course }} engineer, with having {{ exp }} of experience, worked on tools are {{ topics }}, and live {{ live }}, good hands-on experince on {{ tools }}"
