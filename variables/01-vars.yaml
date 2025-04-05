@@ -1,0 +1,10 @@
+- name: varibles to use
+  hosts: web
+  vars:
+    COURSE: "DevOps"
+    TRINING: "TDP"
+    DURATION: "120 days"
+  tasks:
+  - name: print or use the varibles
+    ansible.builtin.dbug:
+      msg: "Hi i am {{ COURSE }} Engineer, have a practiced for {{ DURATION }} to get jon in {{ TRAINING }} company"
