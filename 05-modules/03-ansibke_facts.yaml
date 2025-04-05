@@ -6,3 +6,13 @@
   - name: checking ansible facts
     ansible.builtin.debug:
       msg: "facts are {{ ansible_facts }}"
+  - name: install pacakges for Redhat
+    ansible.builtin.dnf:
+      name: nginx
+      state: present
+    when: os_family == RedHat
+  - name: install pacakges for debian
+    ansible.builtin.apt:
+      name: nginx
+      state: present
+    when: os_family == Debian
