@@ -3,6 +3,6 @@
   become: yes #need root to create user or need executr permision
   connection: local
   tasks:
-  - name: checking ansibvle facts
-    ansible.builtin.deug:
+  - name: checking ansible facts
+    ansible.builtin.debug:
       msg: "facts are {{ ansible_facts }}"
