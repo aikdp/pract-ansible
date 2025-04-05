@@ -10,9 +10,9 @@
     ansible.builtin.dnf:
       name: nginx
       state: present
-    when: os_family == RedHat
+    when: distribution == "RedHat"
   - name: install pacakges for debian
     ansible.builtin.apt:
       name: nginx
       state: present
-    when: os_family == Debian
+    when: distribution == "Debian"
