@@ -1,6 +1,6 @@
 - name: varibles to use
   hosts: web
-  vars_file:
+  vars_files:
   - file_vars.yaml
   tasks:
   - name: print or use the varibles
