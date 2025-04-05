@@ -1,0 +1,8 @@
+- name: See ansible facts
+  hosts: local
+  become: yes #need root to create user or need executr permision
+  connection: local
+  tasks:
+  - name: checking ansibvle facts
+    ansible.builtin.deug:
+      msg: "facts are {{ ansible_facts }}"
