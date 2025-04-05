@@ -3,7 +3,7 @@
   become: yes #need root to create user or need executr permision
   connection: local
   tasks:
-  - name: Remove the user 'expense'
+  - name: craete the user 'expense'
     ansible.builtin.user:
       name: expense
-      state: absent
+      state: present
