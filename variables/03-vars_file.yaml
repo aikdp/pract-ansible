@@ -8,7 +8,7 @@
       msg: "Hi i am {{ COURSE }} Engineer, have a practiced for {{ DURATION }} to get jon in {{ TRAINING }} company"
   #tasks2
   - name: print the vars in task level
-    vars:
-      COURSE: "AWS and AZURE DevOps"
+    # vars:
+    #   COURSE: "AWS and AZURE DevOps"
     ansible.builtin.debug:
       msg: "Hi i am {{ COURSE }} Engineer, have a practiced for {{ DURATION }} to get jon in {{ TRAINING }} company"
