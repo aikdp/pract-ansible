@@ -3,11 +3,11 @@
   vars_files:
   - file_vars.yaml
   tasks:
-  - name: print or use the varibles
+  - name: print or use the varibles from YAML VAR file
     ansible.builtin.debug:
       msg: "Hi i am {{ COURSE }} Engineer, have a practiced for {{ DURATION }} to get jon in {{ TRAINING }} company"
   #tasks2
-  - name: print the vars in task level
+  - name: print the vars in task level form YAML VAR file
     # vars:
     #   COURSE: "AWS and AZURE DevOps"
     ansible.builtin.debug:
