@@ -1,0 +1,16 @@
+- name: Varibles form Prompt
+  hosts: web
+  vars_prompt:
+  - name: COURSE
+    prompt: "Please enetr course name"
+    private: false
+  - name: TRAINING
+    prompt: "Please enter training"
+    private: false
+  - name: DURATION
+    prompt: "Please enter duration"
+    private: false
+  tasks:
+  - name: print the varibles form prompt
+    ansible.builtin.debug:
+      msg: "Hi i am {{ COURSE }} Engineer, have a practiced for {{ DURATION }} to get jon in {{ TRAINING }} company"
