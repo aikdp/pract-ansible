@@ -10,6 +10,6 @@
     ansible.builtin.debug:
       msg: check the info {{ USER }}
       
-  # - name: craete user if not exists
-  #   ansible.builtin.command: adduser expense
-  #   when: USER.rc ! == 0
+  - name: craete user if not exists
+    ansible.builtin.command: adduser expense
+    when: USER.rc ! == 0
