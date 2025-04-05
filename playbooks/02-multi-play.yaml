@@ -1,0 +1,12 @@
+- name: Play-1 the server
+  hosts: web
+  tasks:
+  - name: play1 task1 the server for repsonse
+    ansible.builtin.debug:
+      msg: "Hi aim form PALY1 TASK1"
+- name: Play02 the server
+  hosts: web
+  tasks:
+  - name: play2 task1 the server for repsonse
+    ansible.builtin.debug:
+      msg: "Hi aim form PALY2 TASK1"
