@@ -6,4 +6,4 @@
   - name: Remove the user 'expense'
     ansible.builtin.user:
       name: expense
-      state: present
+      state: absent
