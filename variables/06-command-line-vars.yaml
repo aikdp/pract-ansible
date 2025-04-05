@@ -1,0 +1,12 @@
+- name: varibles to use form Commandline
+  hosts: web
+  tasks:
+  - name: print or use the varibles from command
+    ansible.builtin.debug:
+      msg: "Hi i am {{ COURSE }} Engineer, have a practiced for {{ DURATION }} to get jon in {{ TRAINING }} company"
+  #tasks2
+  - name: print the vars in task level from command
+    # vars:
+    #   COURSE: "AWS and AZURE DevOps"
+    ansible.builtin.debug:
+      msg: "Hi i am {{ COURSE }} Engineer, have a practiced for {{ DURATION }} to get jon in {{ TRAINING }} company"
