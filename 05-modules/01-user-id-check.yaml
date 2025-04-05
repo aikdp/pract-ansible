@@ -1,5 +1,6 @@
 - name: check the user
   hosts: local
+  become: yes
   connection: local
   tasks:
   - name: please check user
