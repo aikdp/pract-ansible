@@ -4,7 +4,7 @@
   become: yes
   tasks:
   - name: Simple command 
-    ansible.builtin.command: ls -ltr
+    ansible.builtin.command: ls -ltr > /tmp/durga.txt
 
   - name: Shell 
     ansible.builtin.shell: ps -ef | grep ssh > /tmp/prasad.txt
