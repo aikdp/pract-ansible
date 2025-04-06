@@ -1,0 +1,14 @@
+- name: Loop the basic details
+  hosts: local
+  connection: local
+  become: yes
+  tasks:
+  - name: Print the servers
+    ansible.builtin.debug:
+      msg: "Hi am a {{ item }} engineer"
+    loop:
+    - DevOps
+    - AWS
+    - Azure
+    - SOC
+    - Data

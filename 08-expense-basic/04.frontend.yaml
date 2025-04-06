@@ -1,0 +1,59 @@
+#configure Frontend 
+- name: Configuration of Frontend
+  hosts: frontend
+  become: yes
+  vars:
+    root_password: "ExpenseApp@1"
+    login_mysql_host: "mysql.telugudevops.online"
+  tasks:
+   #install libaraies to connect Server
+  - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
+    ansible.builtin.pip:
+    name: 
+      - PyMySQL
+      - cryptography
+    executable: pip3.9
+  
+  - name: Package nginx installation
+    ansible.builtin.package:
+      name: nginx
+      state: present
+
+  - name: Start the service
+    ansible.builtin.service:
+      name: nginx
+      state: started
+      enabled: yes
+
+  #rm -rf /usr/share/nginx/html/*
+  - name: Rmeove the defalut content
+    ansible.builtin.file:
+      path: /usr/share/nginx/html
+      state: absent
+
+  - name: Create directory
+    ansible.builtin.file:
+      path: /usr/share/nginx/html
+      state: directory
+
+  - name: Download frontend code
+    ansible.builtin.get_url:
+      url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+      dest: /tmp/frontend.zip
+  
+  - name: Unarchive a backend code
+    ansible.builtin.unarchive:
+      src: /tmp/frontend.zip
+      dest: /usr/share/nginx/html
+      remote_src: yes
+  
+  - name: Copy file from local to /etc/nginx/default.d/expense.conf
+    ansible.builtin.copy:
+      src: expense.conf
+      dest: /etc/nginx/default.d/expense.conf
+      remote_src: yes
+  
+  - name: restart the service
+    ansible.builtin.service:
+      name: nginx
+      state: restarted

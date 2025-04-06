@@ -1,0 +1,15 @@
+- name: Install packages using loop
+  hosts: local
+  connection: local
+  become: yes
+  tasks:
+  - name: Install the servers
+    ansible.builtin.packages:
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+    loop:
+    - { name: nginx, state: present }
+    - { name: httpd, state: present }
+    - { name: git, state: present }
+    - { name: postfix, state: absent }
+    - { name: nodejs, state: absent }

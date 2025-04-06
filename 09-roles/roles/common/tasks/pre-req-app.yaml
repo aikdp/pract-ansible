@@ -1,0 +1,18 @@
+#Delete defalut content
+- name: Rmeove the defalut {{ dir_path }} content
+  ansible.builtin.file:
+    path: "{{ dir_path }}"
+    state: absent
+    
+#create dir path for every new version of code
+- name: "Create {{ dir_path }} directory"
+  ansible.builtin.file:
+    path: "{{ dir_path }}"
+    state: directory
+
+#download code for new version
+- name: "Unarchive a {{ component }} code"
+  ansible.builtin.unarchive:
+    src:  "https://expense-builds.s3.us-east-1.amazonaws.com/expense-{{ component }}-v2.zip"
+    dest: "{{ dir_path }}"
+    remote_src: yes

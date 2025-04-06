@@ -1,0 +1,57 @@
+- name: Function or filter in ansible to manipulate data
+  hosts: local
+  connection: local
+  become: yes
+  tasks:
+  - name: print the defaukt varibles
+    ansible.builtin.debug:
+      msg: "I am {{ ENG | defalut ('AWS DevOps') }}
+  - name: convert upper to lower
+    vars:
+      ENG: "AWS DEVOPS"
+    ansible.builtin.debug:
+      msg: "I am {{ ENG | lower }} Engineer"
+  - name: convert upper to lower
+    vars:
+      ENG: "aws devops"
+    ansible.builtin.debug:
+      msg: "I am {{ ENG | upper }} Engineer"
+  - name: convert upper to lower
+    vars:
+      ENG: [1, 2, 2, 3, 22, 4, 22, 3]
+    ansible.builtin.debug:
+      msg: "Unique numbers are: { ENG | unique }}"
+  - name: convert upper to lower
+    vars:
+      ENG: [1, 2, 2, 3, 22, 4, 22, 3]
+    ansible.builtin.debug:
+      msg: "Min: { ENG | min }}, Max: {{ ENG | max }}"
+    
+  #dict to items
+  - name: covert dict to items
+    vars:
+      devops:
+        user: "Durga"
+        age: 20
+        YOE: 3
+    ansible.builtin.debug:
+      msg: "User deatils are: {{ devops | dict2items }}"
+  
+  #Convert Map to dict
+  - name: Map to Dictionary
+    vars:
+      devops:
+      - key: "user"
+        value: "Durga"
+      - key: "age"
+        value: 20
+      - key: "YOE"
+        value: 3
+    ansible.builtin.debug:
+      msg: "The user deatils are: {{ devops | items2dict }} "
+  #To test if a string is a valid IP address:
+  - name: test given IP is valid or not
+    vars:
+      my_var: "192.2.20.0/24"
+    ansible.builtin.debug:
+      msg: "Ip address is: {{ my_var | ansible.utils.ipv4 }}" #ansible.utils.ipv6

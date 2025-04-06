@@ -1,0 +1,43 @@
+#configure mysql 
+- name: Configuration of MySQL
+  hosts: mysql
+  become: yes
+  vars:
+    root_password: "ExpenseApp@1"
+    login_mysql_host: "mysql.telugudevops.online"
+  tasks:
+  #install libaraies to connect Server
+  - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
+    ansible.builtin.pip:
+    name: 
+      - PyMySQL
+    executable: pip3.9
+
+  - name: Install MySQL servre
+    ansible.builtin.package:
+      name: mysql-server
+      state: present
+
+  - name: Enable MySQL Server
+    ansible.builtin.service:
+      name: mysqld
+      state: started
+      enabled: yes
+  #mysql_secure_installation --set-root-pass ExpenseApp@1
+  - name: Check root password is already setup or not
+    community.mysql.mysql_info:
+      login_user: root
+      login_password: "{{ root_password }}"
+      login_host: "{{ login_mysql_host }}"
+    ignore_errors: true
+    register: mysql_db_data
+  
+  - name: print the mysql info
+    ansible.builtin.debug:
+      msg: "Mysql Information is {{ mysql_db_data }}"
+    
+  - name: Set up MySWL root password
+    ansible.builtin.command: "mysql_secure_installation --set-root-pass '{{ root_password }}'"
+    when: mysql_db_data.failed is true
+  
+    

@@ -1,0 +1,55 @@
+- name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
+  ansible.builtin.pip:
+  name: 
+    - boto3
+    - botocore
+    - PyMySQL
+    - cryptography
+  executable: pip3.9
+
+- name: Package nginx installation
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+- name: Start the service
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: yes
+
+#Run taks from another role which is common
+- name: Import role from common role
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: pre-req-app
+  
+# #rm -rf /usr/share/nginx/html/*
+# - name: Rmeove the defalut content
+#   ansible.builtin.file:
+#     path: /usr/share/nginx/html
+#     state: absent
+
+# - name: Create directory
+#   ansible.builtin.file:
+#     path: /usr/share/nginx/html
+#     state: directory
+
+# - name: Download frontend code
+#   ansible.builtin.get_url:
+#     url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+#     dest: /tmp/frontend.zip
+
+# - name: Unarchive a backend code
+#   ansible.builtin.unarchive:
+#     src: /tmp/frontend.zip
+#     dest: /usr/share/nginx/html
+#     remote_src: yes
+
+- name: "Copy file from local to /etc/nginx/default.d/expense.conf"
+  ansible.builtin.template:
+    src: expense.conf.j2
+    dest: /etc/nginx/default.d/expense.conf
+    remote_src: yes
+  notify:
+    - restart the service

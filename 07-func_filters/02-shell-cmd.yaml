@@ -1,0 +1,11 @@
+- name: Checkk Shell vs Command 
+  hosts: local
+  connection: local
+  become: yes
+  tasks:
+  - name: Simple command 
+    ansible.builtin.command: ls -ltr > /tmp/user.txt
+
+  - name: Shell 
+    ansible.builtin.shell: ps -ef | grep ssh
+  

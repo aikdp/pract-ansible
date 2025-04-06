@@ -1,0 +1,62 @@
+#Create Ec2 with ansible
+- name: Creating ec2 insatnce
+  hosts: local
+  connection: local
+  vars:
+    instances:
+      - mysql
+      - backend
+      - frontend
+    domain_name: "telugudevops.online"
+  tasks:
+  #install libarraies to connect aws
+  - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
+    ansible.builtin.pip:
+    name: 
+      - boto3
+      - botocore
+    executable: pip3.9
+
+  - name: create instances with existing keypairs
+    amazon.aws.ec2_instance:
+      name: "{{ item }}"
+      key_name: "jenkins"
+      vpc_subnet_id: "subnet-020e28d5acdc9ff4f"
+      instance_type: "t3.micro"
+      security_group: "sg-0f487d954cbe820ef"
+      network_interfaces:
+        - assign_public_ip: true
+      # image_id: "ami-09c813fb71547fc4f" #devops-practice
+      image_id: "ami-084568db4383264d4" #ubuntu
+      tags:
+        Environment: Ansible
+      loop: "{{ instances }}"
+      register: ec2_instances
+  
+  #create Route53 records private ips
+  - name: create A record with 3 IPs
+    amazon.aws.route53:
+      state: present
+      zone: "{{ domain_name }}"
+      record: "{{ item.item}}.{{ domain_name }}"          #mysql.telugudevops.online
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].private_ip_address }}" #172.33.2.22
+      wait: true
+      overwrite: true
+      loop: "{{ ec2_instances.results }}"
+  
+   #create Route53 records public ip for frontend
+  - name: create A record with for frontend
+    amazon.aws.route53:
+      state: present
+      zone: "{{ domain_name }}"
+      record: "{{ domain_name }}"          #telugudevops.online
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].public_ip_address }}" #44.25.6.0
+      wait: true
+      overwrite: true
+      loop: "{{ ec2_instances }}"
+      when: item.item = "frontend"
+    
