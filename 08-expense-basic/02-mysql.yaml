@@ -3,21 +3,35 @@
   hosts: mysql
   become: yes
   vars:
-    ansible_python_interpreter: /usr/bin/python3
     root_password: "ExpenseApp@1"
     login_mysql_host: "mysql.telugudevops.online"
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
+  - name: Update apt/yum cache
+    ansible.builtin.package:
+      name: "*"
+      state: latest
+    when: ansible_os_family in ["Debian", "RedHat"]
+
+  - name: Ensure EPEL repository is enabled (RHEL/CentOS)
+    yum:
+      name: epel-release
+      state: present
+    when: ansible_os_family == "RedHat"
+
   - name: Install Python3 and pip
     package:
-      name:
-        - python3
-        - python3-pip
+      name: "{{ item }}"
       state: present
+    loop: >
+      {{ 'python3, python3-pip' if ansible_os_family == 'Debian' else 'python3, python3-pip, python3-setuptools' }}
+    ignore_errors: true
 
   - name: Install PyMySQL via pip3
     pip:
       name: PyMySQL
       executable: pip3
+    ignore_errors: true
 
   - name: Install MySQL server
     ansible.builtin.package:
