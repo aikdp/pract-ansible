@@ -3,15 +3,33 @@
   hosts: mysql
   become: yes
   vars:
+    ansible_python_interpreter: /usr/bin/python3
     root_password: "ExpenseApp@1"
     login_mysql_host: "mysql.telugudevops.online"
   tasks:
+  - name: Install Python3 and pip
+    package:
+      name:
+        - python3
+        - python3-pip
+      state: present
+
+  - name: Install PyMySQL via pip3
+    pip:
+      name: PyMySQL
+      executable: pip3
+
+  - name: Install MySQL server
+    ansible.builtin.package:
+      name: mysql-server
+      state: present
+
   #install libaraies to connect Server
-  - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
-    ansible.builtin.pip:
-      name: 
-        - PyMySQL
-      executable: pip3.12
+  # - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
+  #   ansible.builtin.pip:
+  #     name: 
+  #       - PyMySQL
+  #     executable: pip3.12
 
   - name: Install MySQL server
     ansible.builtin.package:
