@@ -61,7 +61,7 @@
       login_user: root
       login_password: "{{ root_password }}"
       login_host: "{{ login_mysql_host }}"
-      ignore_errors: true
+    ignore_errors: true
     register: mysql_db_data
   
   - name: print the mysql info
