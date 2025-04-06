@@ -7,31 +7,18 @@
     login_mysql_host: "mysql.telugudevops.online"
     ansible_python_interpreter: /usr/bin/python3
   tasks:
-  - name: Update package cache
-    ansible.builtin.package:
-      name: "*"
-      state: latest
-    when: ansible_os_family in ["Debian", "RedHat"]
-
-  - name: Install EPEL repository (for RHEL/CentOS)
+  - name: Install Python3
     yum:
-      name: epel-release
+      name: python3
       state: present
-    when: ansible_os_family == "RedHat"
 
-  - name: Install Python3 and pip3
-    package:
-      name:
-        - python3
-        - python3-pip
-        - python3-setuptools
-      state: present
-    ignore_errors: true
+  - name: Download get-pip.py
+    get_url:
+      url: https://bootstrap.pypa.io/get-pip.py
+      dest: /tmp/get-pip.py
 
-  - name: Ensure pip3 is available
-    command: which pip3
-    register: pip3_path
-    failed_when: pip3_path.rc != 0
+  - name: Install pip3 using get-pip.py
+    command: python3 /tmp/get-pip.py
 
   - name: Install PyMySQL using pip3
     pip:
