@@ -56,6 +56,6 @@
   #To test if a string is a valid IP address:
   - name: test given IP is valid or not
     vars:
-      my_var: "2.2.20.65/24"
+      my_var: "2.2.20./24"
     ansible.builtin.debug:
       msg: "Ip address is: {{ my_var | ansible.utils.ipv4 }}" #ansible.utils.ipv6
