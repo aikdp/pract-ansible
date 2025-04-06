@@ -5,27 +5,31 @@
   tasks:
   - name: print the default variables
     ansible.builtin.debug:
-      msg: "I am {{ ENG | default ('AWS DevOps') }}"
+      msg: "I am {{ ENG | default ('AWS DevOps') }} engineer"
+
   - name: convert upper to lower
     vars:
       ENG: "AWS DEVOPS"
     ansible.builtin.debug:
-      msg: "I am {{ ENG | lower }} Engineer"
-  - name: convert upper to lower
+      msg: "I am {{ ENG | lower }} engineer"
+
+  - name: convert lower to upper
     vars:
-      ENG: "aws devops"
+      ENG: "azure developer"
     ansible.builtin.debug:
-      msg: "I am {{ ENG | upper }} Engineer"
-  - name: convert upper to lower
-    vars:
-      ENG: [1, 2, 2, 3, 22, 4, 22, 3]
-    ansible.builtin.debug:
-      msg: "Unique numbers are: { ENG | unique }}"
-  - name: convert upper to lower
+      msg: "I am {{ ENG | upper }} engineer"
+
+  - name: Print unique numbers only
     vars:
       ENG: [1, 2, 2, 3, 22, 4, 22, 3]
     ansible.builtin.debug:
-      msg: "Min: { ENG | min }}, Max: {{ ENG | max }}"
+      msg: "Unique numbers are: {{ ENG | unique }}"
+
+  - name: Max and Min numbers
+    vars:
+      ENG: [1, 2, 2, 3, 22, 4, 22, 3]
+    ansible.builtin.debug:
+      msg: "Min: {{ ENG | min }}, Max: {{ ENG | max }}"
     
   #dict to items
   - name: covert dict to items
@@ -52,6 +56,6 @@
   #To test if a string is a valid IP address:
   - name: test given IP is valid or not
     vars:
-      my_var: "192.2.20.0/24"
+      my_var: "2.2.20.65/24"
     ansible.builtin.debug:
       msg: "Ip address is: {{ my_var | ansible.utils.ipv4 }}" #ansible.utils.ipv6
