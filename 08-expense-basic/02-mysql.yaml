@@ -56,7 +56,7 @@
       enabled: yes
 
   #mysql_secure_installation --set-root-pass ExpenseApp@1
-  - name: Check root password is already setup or not
+  - name: Check if root password is already set
     community.mysql.mysql_info:
       login_user: root
       login_password: "{{ root_password }}"
@@ -68,8 +68,7 @@
     ansible.builtin.debug:
       msg: "Mysql Information is {{ mysql_db_data }}"
     
-  - name: Set up MySWL root password
+  - name: Set up MySQL root password if not set
     ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ root_password }}"
     when: mysql_db_data.failed is true
-  
     
