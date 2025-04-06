@@ -22,10 +22,13 @@
       state: present
       update_cache: yes
 
-  - name: Install PyMySQL using pip3
-    pip:
-      name: PyMySQL
-      executable: pip3
+  - name: Install pip3 using get-pip.py with system package override
+    command: python3 /tmp/get-pip.py --break-system-packages
+
+  # - name: Install PyMySQL using pip3
+  #   pip:
+  #     name: PyMySQL
+  #     executable: pip3
 
   - name: Install MySQL server
     ansible.builtin.package:
