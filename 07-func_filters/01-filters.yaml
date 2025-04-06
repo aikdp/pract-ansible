@@ -3,9 +3,9 @@
   connection: local
   become: yes
   tasks:
-  - name: print the defaukt varibles
+  - name: print the default variables
     ansible.builtin.debug:
-      msg: "I am {{ ENG | defalut ('AWS DevOps') }}
+      msg: "I am {{ ENG | defalut ('AWS DevOps') }}"
   - name: convert upper to lower
     vars:
       ENG: "AWS DEVOPS"
