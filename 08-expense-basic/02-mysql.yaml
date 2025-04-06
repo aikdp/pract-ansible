@@ -16,9 +16,11 @@
     get_url:
       url: https://bootstrap.pypa.io/get-pip.py
       dest: /tmp/get-pip.py
-
-  - name: Install pip3 using get-pip.py
-    command: python3 /tmp/get-pip.py
+  - name: Install pip3 via apt
+    apt:
+      name: python3-pip
+      state: present
+      update_cache: yes
 
   - name: Install PyMySQL using pip3
     pip:
