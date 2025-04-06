@@ -12,9 +12,9 @@
   #install libarraies to connect aws
   - name: Install libraries for python
     ansible.builtin.pip:
-    name: 
-      - boto3
-      - botocore
+      name: 
+        - boto3
+        - botocore
     executable: pip3.9
 
   - name: create instances with existing keypairs
