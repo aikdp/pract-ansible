@@ -9,9 +9,9 @@
   #install libaraies to connect Server
   - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
     ansible.builtin.pip:
-    name: 
-      - PyMySQL
-    executable: pip3.12
+      name: 
+        - PyMySQL
+      executable: pip3.12
 
   - name: Install MySQL server
     ansible.builtin.package:
