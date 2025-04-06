@@ -44,9 +44,9 @@
       ansible_python_interpreter: /opt/mysql-venv/bin/python
 
   - name: Install MySQL server
-      ansible.builtin.package:
-        name: mysql-server
-        state: present
+    ansible.builtin.package:
+      name: mysql-server
+      state: present
 
     #install libaraies to connect Server
     # - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
