@@ -32,6 +32,10 @@
   - name: Install Python libraries inside virtual environment
     command: "{{ python_venv_path }}/bin/pip install {{ item }}"
     loop: "{{ python_libs }}"
+  
+  - name: Set Ansible Python interpreter to virtualenv Python
+    set_fact:
+       ansible_python_interpreter: "{{ python_venv_path }}/bin/python"
 
   - name: Install MySQL server
     ansible.builtin.package:
