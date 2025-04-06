@@ -4,8 +4,8 @@
   become: yes
   tasks:
   - name: Simple command 
-    ansible.builtin.command: ls -ltr > /tmp/durga.txt
+    ansible.builtin.command: ls -ltr  #ls -ltr > /tmp/durga.txt #command not redirects 
 
   - name: Shell 
-    ansible.builtin.shell: ps -ef | grep ssh > /tmp/prasad.txt
+    ansible.builtin.shell: ps -ef | grep ssh > /tmp/prasad.txt 
   

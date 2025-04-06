@@ -10,7 +10,7 @@
     domain_name: "telugudevops.online"
   tasks:
   #install libarraies to connect aws
-  - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
+  - name: Install libraries for python
     ansible.builtin.pip:
     name: 
       - boto3
