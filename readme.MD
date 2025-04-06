@@ -44,7 +44,7 @@ sudo ./aws/install
 
 ```
 
-4. aws configure or Give IAM role to EC2
+4. aws configure or Give IAM role to EC2 and R53 access
 ```
 export AWS_ACCESS_KEY_ID=your-access-key
 export AWS_SECRET_ACCESS_KEY=your-secret-key
