@@ -7,5 +7,5 @@
     ansible.builtin.command: ls -ltr
 
   - name: Shell 
-    ansible.builtin.shell: ps -ef | grep ssh >> /tpm/prasad.txt
+    ansible.builtin.shell: ps -ef | grep ssh > /tmp/prasad.txt
   
