@@ -57,8 +57,8 @@
       image_id: "ami-084568db4383264d4" #ubuntu
       tags:
         Environment: Ansible
-      loop: "{{ instances }}"
-      register: ec2_instances
+    loop: "{{ instances }}"
+    register: ec2_instances
   
   #create Route53 records private ips
   - name: create A record with 3 IPs
