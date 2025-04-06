@@ -31,29 +31,29 @@
       state: present
       update_cache: yes
 
-- name: Create virtual environment
-  command: python3 -m venv /opt/mysql-venv
-  args:
-    creates: /opt/mysql-venv
+  - name: Create virtual environment
+    command: python3 -m venv /opt/mysql-venv
+    args:
+      creates: /opt/mysql-venv
 
-- name: Install PyMySQL in virtualenv
-  command: /opt/mysql-venv/bin/pip install PyMySQL
+  - name: Install PyMySQL in virtualenv
+    command: /opt/mysql-venv/bin/pip install PyMySQL
 
-- name: Use virtualenv python in future tasks
-  set_fact:
-    ansible_python_interpreter: /opt/mysql-venv/bin/python
+  - name: Use virtualenv python in future tasks
+    set_fact:
+      ansible_python_interpreter: /opt/mysql-venv/bin/python
 
   - name: Install MySQL server
-    ansible.builtin.package:
-      name: mysql-server
-      state: present
+      ansible.builtin.package:
+        name: mysql-server
+        state: present
 
-  #install libaraies to connect Server
-  # - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
-  #   ansible.builtin.pip:
-  #     name: 
-  #       - PyMySQL
-  #     executable: pip3.12
+    #install libaraies to connect Server
+    # - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
+    #   ansible.builtin.pip:
+    #     name: 
+    #       - PyMySQL
+    #     executable: pip3.12
 
   - name: Install MySQL server
     ansible.builtin.package:
