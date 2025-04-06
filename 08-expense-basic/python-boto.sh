@@ -20,3 +20,5 @@ rm -rf awscliv2.zip aws/
 
 # 6. Confirm installation
 aws --version
+
+
