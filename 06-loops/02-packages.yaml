@@ -9,7 +9,7 @@
       state: present
     loop:
     - nginx
-    - httpd
+    - apache2 
     - git
     - postfix
     - nodejs
