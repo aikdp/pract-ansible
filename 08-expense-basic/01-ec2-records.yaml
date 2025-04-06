@@ -10,6 +10,14 @@
       - frontend
     domain_name: "telugudevops.online"
   tasks:
+  - name: Install pip pacake
+    apt:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - python-pip
+      - python3-pip
+      
   #install libarraies to connect aws
   - name: Install libraries for python
     ansible.builtin.pip:
