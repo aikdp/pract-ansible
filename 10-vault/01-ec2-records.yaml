@@ -3,8 +3,8 @@
   hosts: local
   connection: local
   become: yes
-  vars_files:
-    - "/var/expense/credentials.yaml"
+  # vars_files:
+  #   - "/var/expense/credentials.yaml"
   vars:
     # python_venv_path: "/opt/myenv"
     # python_libs:
