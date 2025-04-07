@@ -3,6 +3,6 @@
   hosts: frontend
   become: yes
   vars_file:
-  - "/var/expense/credentails.yaml"
+  - "/var/expense/credentials.yaml"
   roles:
   - frontend
