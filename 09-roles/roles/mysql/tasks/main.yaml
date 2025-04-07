@@ -1,9 +1,9 @@
 - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
   ansible.builtin.pip:
-  name: 
-    - PyMySQL
-    - cryptography
-  executable: pip3.9
+    name: 
+      - PyMySQL
+      - cryptography
+    executable: pip3.9
 
 - name: Install MySQL servre
   ansible.builtin.package:

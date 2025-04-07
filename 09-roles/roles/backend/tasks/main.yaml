@@ -1,11 +1,11 @@
 - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
   ansible.builtin.pip:
-  name: 
-    # - boto3
-    # - botocore
-    - PyMySQL
-    # - cryptography
-  executable: pip3.9
+    name: 
+      # - boto3
+      # - botocore
+      - PyMySQL
+      # - cryptography
+    executable: pip3.9
 
 - name: Disable Nodjs module
   ansible.builtin.command: dnf module disable nodejs -y
