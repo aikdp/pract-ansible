@@ -11,7 +11,7 @@
     ansible.builtin.pip:
       name: 
         - PyMySQL
-        - cryptography
+        # - cryptography
       executable: pip3
 
   - name: Disable Nodjs module
@@ -26,7 +26,7 @@
       state: present
     loop:
       - nodejs
-      - mysql-server
+      - mysql
   
   - name: Create or user expense
     ansible.builtin.user:
