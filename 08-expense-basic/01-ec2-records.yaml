@@ -48,13 +48,13 @@
   - name: create instances with existing keypairs
     amazon.aws.ec2_instance:
       name: "{{ item }}"
-      key_name: "jenkins"
+      # key_name: "jenkins"
       region: "us-east-1"
       vpc_subnet_id: "subnet-020e28d5acdc9ff4f"
       instance_type: "t3.micro"
       security_group: "sg-0f487d954cbe820ef"
-      # image_id: "ami-09c813fb71547fc4f" #devops-practice
-      image_id: "ami-084568db4383264d4" #ubuntu
+      image_id: "ami-09c813fb71547fc4f" #devops-practice
+      # image_id: "ami-084568db4383264d4" #ubuntu
       tags:
         Environment: Ansible
     loop: "{{ instances }}"
