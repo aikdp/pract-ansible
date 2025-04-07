@@ -9,10 +9,10 @@
    #install libaraies to connect Server
   - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
     ansible.builtin.pip:
-    name: 
-      - PyMySQL
-      - cryptography
-    executable: pip3.9
+      name: 
+        - PyMySQL
+        # - cryptography
+      executable: pip3.9
   
   - name: Package nginx installation
     ansible.builtin.package:
