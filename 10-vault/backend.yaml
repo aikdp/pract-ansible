@@ -1,0 +1,8 @@
+#configure mysql 
+- name: Configuration of Backend
+  hosts: backend
+  become: yes
+  vars_file:
+  - "/var/expense/credentails.yaml"
+  roles:
+  - backend

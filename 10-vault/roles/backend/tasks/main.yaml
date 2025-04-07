@@ -1,0 +1,86 @@
+- name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
+  ansible.builtin.pip:
+    name: 
+      # - boto3
+      # - botocore
+      - PyMySQL
+      # - cryptography
+    executable: pip3.9
+
+- name: Disable Nodjs module
+  ansible.builtin.command: dnf module disable nodejs -y
+
+- name: Enable NodeJs module
+  ansible.builtin.command: dnf module enable nodejs:20 -y
+
+- name: Install NodeJs 
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - nodejs
+    - mysql-server
+
+- name: Create or user expense
+  ansible.builtin.user:
+    name: expense
+    state: present
+  
+#Run taks from another role which is common
+- name: Import role from common role
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: pre-req-app
+
+# - name: Create directory
+#   ansible.builtin.file:
+#     path: /app
+#     state: directory
+
+# - name: Download backend code
+#   ansible.builtin.get_url:
+#     url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+#     dest: /tmp/backend.zip
+
+# - name: Unarchive a backend code
+#   ansible.builtin.unarchive:
+#     src: /tmp/backend.zip
+#     dest: /app
+#     remote_src: yes
+  
+# - name: Install npm
+#   community.general.npm:
+#     name: backend
+#     path: /app
+
+# - name: Install node.js package globally.
+#   npm:
+#     path: /app
+#     state: present
+
+- name: Install npm where package.json file exists
+  ansible.builtin.command: npm install
+  args:
+    chdir: /app
+
+- name: "Copy file from local to /etc/systemd/system/backend.service"
+  ansible.builtin.template:
+    src: backend.service.j2
+    dest: /etc/systemd/system/backend.service
+
+#mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
+- name: "Load schema to MySQL DB from {{ component }} server"
+  community.mysql.mysql_db:
+    name: all
+    state: import
+    login_user: root
+    login_host: "{{ login_mysql_host }}"
+    login_password: "{{ root_password }}"
+    target: /app/schema/backend.sql
+
+- name: "Restart {{ component }}"
+  ansible.builtin.systemd_service:
+    name: backend
+    state: started
+    enabled: true
+    daemon_reload: true

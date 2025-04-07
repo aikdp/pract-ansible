@@ -1,0 +1,8 @@
+#configure mysql 
+- name: Configuration of MySQL
+  hosts: mysql
+  become: yes
+  vars_file:
+    - "/var/expense/credentails.yaml"
+  roles:
+  - mysql

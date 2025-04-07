@@ -1,0 +1,34 @@
+- name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
+  ansible.builtin.pip:
+    name: 
+      - PyMySQL
+      - cryptography
+    executable: pip3.9
+
+- name: Install MySQL servre
+  ansible.builtin.package:
+    name: mysql-server
+    state: present
+
+- name: Enable MySQL Server
+  ansible.builtin.service:
+    name: mysqld
+    state: started
+    enabled: yes
+
+#mysql_secure_installation --set-root-pass ExpenseApp@1
+- name: Check if root password is already set
+  community.mysql.mysql_info:
+    login_user: root
+    login_password: "{{ root_password }}"
+    login_host: "{{ login_mysql_host }}"
+  ignore_errors: true
+  register: mysql_db_data
+
+- name: print the mysql info
+  ansible.builtin.debug:
+    msg: "Mysql Information is {{ mysql_db_data }}"
+  
+- name: Set up MySQL root password if not set
+  ansible.builtin.command: "mysql_secure_installation --set-root-pass '{{ root_password }}'"
+  when: mysql_db_data.failed is true
