@@ -4,10 +4,10 @@
   connection: local
   become: yes
   vars:
-    python_venv_path: "/opt/myenv"
-    python_libs:
-      - boto3
-      - botocore
+    # python_venv_path: "/opt/myenv"
+    # python_libs:
+    #   - boto3
+    #   - botocore
     instances:
       - mysql
       - backend
@@ -15,34 +15,34 @@
     domain_name: "telugudevops.online"
   tasks:
 
-  - name: Install required system packages
-    apt:
-      name:
-        - python3
-        - python3-pip
-        - python3-venv
-      state: present
-      update_cache: yes
+  # - name: Install required system packages
+  #   apt:
+  #     name:
+  #       - python3
+  #       - python3-pip
+  #       - python3-venv
+  #     state: present
+  #     update_cache: yes
 
-  - name: Create a Python virtual environment
-    command: python3 -m venv {{ python_venv_path }}
-    args:
-      creates: "{{ python_venv_path }}"
+  # - name: Create a Python virtual environment
+  #   command: python3 -m venv {{ python_venv_path }}
+  #   args:
+  #     creates: "{{ python_venv_path }}"
 
-  - name: Upgrade pip inside virtual environment
-    command: "{{ python_venv_path }}/bin/pip install --upgrade pip"
+  # - name: Upgrade pip inside virtual environment
+  #   command: "{{ python_venv_path }}/bin/pip install --upgrade pip"
 
-  - name: Install Python libraries inside virtual environment
-    command: "{{ python_venv_path }}/bin/pip install {{ item }}"
-    loop: "{{ python_libs }}"
+  # - name: Install Python libraries inside virtual environment
+  #   command: "{{ python_venv_path }}/bin/pip install {{ item }}"
+  #   loop: "{{ python_libs }}"
 
-  # #install libarraies to connect aws
-  # - name: Install libraries for python
-  #   ansible.builtin.pip:
-  #     name: 
-  #       - boto3
-  #       - botocore
-  #     executable: pip3.12
+  #install libarraies to connect aws
+  - name: Install libraries for python
+    ansible.builtin.pip:
+      name: 
+        - boto3
+        - botocore
+      executable: pip3.12
 
   - name: create instances with existing keypairs
     amazon.aws.ec2_instance:
