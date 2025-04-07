@@ -1,0 +1,46 @@
+- name: install nginx package
+  hosts: web
+  become: yes
+  tasks:
+  - name: Package nginx installation
+    ansible.builtin.package:
+      name: nginx
+      state: present
+    tags:
+      environment: "dev"
+
+  - name: Start the service
+    ansible.builtin.service:
+      name: nginx
+      state: started
+      enabled: yes
+    tags:
+      environment: "dev"
+    
+  - name: Remove nginx package
+    ansible.builtin.package:
+      name: nginx
+      state: absent
+    tags:
+      environment: "qa"
+
+  - name: Install Package httpd
+    ansible.builtin.package:
+      name: httpd
+      state: present
+    tags:
+      environment: "dev"
+
+  - name: Install Package httpd
+    ansible.builtin.package:
+      name: httpd
+      state: absent
+    tags:
+      environment: "qa"
+
+  - name: Install Package httpd
+    ansible.builtin.package:
+      name: git
+      state: present
+    tags:
+      environment: "dev"
