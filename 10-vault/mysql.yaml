@@ -3,6 +3,6 @@
   hosts: mysql
   become: yes
   vars_files:
-    - "/var/expense/credentials.yaml"
+    - /var/expense/credentials.yaml
   roles:
   - mysql
