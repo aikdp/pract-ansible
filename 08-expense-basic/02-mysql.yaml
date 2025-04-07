@@ -36,13 +36,13 @@
   # - name: Set Ansible Python interpreter to virtualenv Python
   #   set_fact:
   #      ansible_python_interpreter: "{{ python_venv_path }}/bin/python"
-  
+
       # install libaraies to connect Server
   - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
     ansible.builtin.pip:
       name: 
         - PyMySQL
-      executable: pip3.12
+      executable: pip3.9
 
   - name: Install MySQL server
     ansible.builtin.package:
