@@ -2,7 +2,7 @@
 - name: Configuration of frontend
   hosts: frontend
   become: yes
-  vars_file:
+  vars_files:
   - "/var/expense/credentials.yaml"
   roles:
   - frontend

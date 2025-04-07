@@ -2,7 +2,7 @@
 - name: Configuration of Backend
   hosts: backend
   become: yes
-  vars_file:
+  vars_files:
   - "/var/expense/credentials.yaml"
   roles:
   - backend
