@@ -13,14 +13,26 @@
       notify: Notify Slack on install
 
   handlers:
+    # - name: Notify Slack on install
+    #   ansible.builtin.uri:
+    #     url: "{{ slack_webhook }}"
+    #     method: POST
+    #     headers:
+    #       Content-Type: "application/json"
+    #     body: >
+    #       {
+    #         "text": ":white_check_mark: *Nginx installed successfully* on {{ inventory_hostname }}"
+    #       }
+    #     body_format: json
     - name: Notify Slack on install
-      ansible.builtin.uri:
-        url: "{{ slack_webhook }}"
+      uri:
+        url: "https://hooks.slack.com/services/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"
         method: POST
         headers:
           Content-Type: "application/json"
-        body: >
+        body: |
           {
-            "text": ":white_check_mark: *Nginx installed successfully* on {{ inventory_hostname }}"
+            "text": "✅ Nginx was successfully installed on {{ inventory_hostname }}!"
           }
         body_format: json
+      delegate_to: localhost
