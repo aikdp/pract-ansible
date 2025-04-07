@@ -51,7 +51,7 @@
 
   - name: Enable MySQL Server
     ansible.builtin.service:
-      name: mysql #ubuntu --mysql, redhat--mysqld
+      name: mysqld #ubuntu --mysql, redhat--mysqld
       state: started
       enabled: yes
 
