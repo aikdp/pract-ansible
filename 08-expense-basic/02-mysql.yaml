@@ -3,7 +3,7 @@
   hosts: mysql
   become: yes
   vars:
-    root_password: "ExpenseApp@1"
+    root_password: "ExpenseApp@123"
     login_mysql_host: "mysql.telugudevops.online"
     # python_venv_path: "/opt/myenv"
     python_libs:
