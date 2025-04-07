@@ -3,7 +3,7 @@
   connection: local
   become: yes
   vars:
-    slack_webhook: "https://hooks.slack.com/services/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"
+    slack_webhook: "https://hooks.slack.com/services/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"
 
   tasks:
     - name: Install nginx
@@ -39,7 +39,7 @@
 
     - name: Notify Slack on install
       uri:
-        url: "https://hooks.slack.com/services/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"
+        url: "https://hooks.slack.com/services/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"
         method: POST
         headers:
           Content-Type: "application/json"
