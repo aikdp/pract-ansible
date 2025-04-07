@@ -1,10 +1,10 @@
 - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
   ansible.builtin.pip:
   name: 
-    - boto3
-    - botocore
+    # - boto3
+    # - botocore
     - PyMySQL
-    - cryptography
+    # - cryptography
   executable: pip3.9
 
 - name: Disable Nodjs module
@@ -15,7 +15,7 @@
 
 - name: Install NodeJs 
   ansible.builtin.package:
-    name: nodejs
+    name: "{{ item }}"
     state: present
   loop:
     - nodejs
@@ -67,7 +67,6 @@
   ansible.builtin.template:
     src: backend.service.j2
     dest: /etc/systemd/system/backend.service
-    remote_src: yes
 
 #mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
 - name: "Load schema to MySQL DB from {{ component }} server"

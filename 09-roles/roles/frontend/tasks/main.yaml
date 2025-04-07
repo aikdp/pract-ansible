@@ -1,11 +1,11 @@
-- name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
-  ansible.builtin.pip:
-  name: 
-    - boto3
-    - botocore
-    - PyMySQL
-    - cryptography
-  executable: pip3.9
+# - name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
+#   ansible.builtin.pip:
+#   name: 
+#     - boto3
+#     - botocore
+#     - PyMySQL
+#     - cryptography
+#   executable: pip3.9
 
 - name: Package nginx installation
   ansible.builtin.package:
@@ -50,6 +50,5 @@
   ansible.builtin.template:
     src: expense.conf.j2
     dest: /etc/nginx/default.d/expense.conf
-    remote_src: yes
   notify:
     - restart the service

@@ -1,0 +1,6 @@
+#configure mysql 
+- name: Configuration of frontend
+  hosts: frontend
+  become: yes
+  roles:
+  - frontend

@@ -1,0 +1,6 @@
+#configure mysql 
+- name: Configuration of Backend
+  hosts: backend
+  become: yes
+  roles:
+  - backend
