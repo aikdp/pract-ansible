@@ -7,7 +7,7 @@ resource "aws_instance" "main" {
   tags = merge(
   var.common_tags,
         {
-        Name = "backend-${count.index + 1}"
+        Name = "backend-${count.index + 1}" #count.index + 1--> it starts with backend-1.  count.index-->starts with backend-0, 
         }
   )
 }

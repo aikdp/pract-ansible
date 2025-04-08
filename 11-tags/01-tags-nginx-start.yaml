@@ -7,7 +7,7 @@
       name: nginx
       state: present
     tags:
-      environment: "dev"
+      environment: "dev"  #tag
 
   - name: Start the service
     ansible.builtin.service:
@@ -15,32 +15,32 @@
       state: started
       enabled: yes
     tags:
-      environment: "dev"
+      environment: "dev" #tag
     
   - name: Remove nginx package
     ansible.builtin.package:
       name: nginx
       state: absent
     tags:
-      environment: "qa"
+      environment: "qa" #tag
 
   - name: Install Package httpd
     ansible.builtin.package:
       name: httpd
       state: present
     tags:
-      environment: "dev"
+      environment: "dev" #tag
 
   - name: Install Package httpd
     ansible.builtin.package:
       name: httpd
       state: absent
     tags:
-      environment: "qa"
+      environment: "qa" #tag
 
   - name: Install Package httpd
     ansible.builtin.package:
       name: git
       state: present
     tags:
-      environment: "dev"
+      environment: "dev" #tag
