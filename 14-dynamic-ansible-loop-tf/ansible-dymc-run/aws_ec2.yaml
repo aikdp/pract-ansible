@@ -14,7 +14,7 @@ filters:
   
 hostnames:
 
-  - name: 'private-ip-address'
+  - private-ip-address
 
 compose:
   # Use the private IP address to connect to the host
