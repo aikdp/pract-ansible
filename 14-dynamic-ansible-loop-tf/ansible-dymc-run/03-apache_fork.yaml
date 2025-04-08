@@ -15,3 +15,7 @@
     ansible.builtin.package:
       name: httpd
       state: present
+  - name: Package Apache installation
+    ansible.builtin.service:
+      name: httpd
+      state: absent
