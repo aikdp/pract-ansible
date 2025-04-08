@@ -1,6 +1,5 @@
 - name: install nginx package
   hosts: all
-  forks: 5
   become: yes
   tasks:
   # - name: Package nginx installation
