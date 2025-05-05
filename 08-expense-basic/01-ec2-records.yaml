@@ -52,7 +52,7 @@
       region: "us-east-1"
       vpc_subnet_id: "subnet-020e28d5acdc9ff4f"
       instance_type: "t3.micro"
-      security_group: "sg-0f487d954cbe820ef"
+      security_group: "sg-02ea06af2618f8514"
       image_id: "ami-09c813fb71547fc4f" #devops-practice
       # image_id: "ami-084568db4383264d4" #ubuntu
       tags:
