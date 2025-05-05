@@ -1,0 +1,37 @@
+- name: " ansible playbook for the sql  "
+  hosts: mysql
+  become: yes
+  vars:
+    password: "ExpenseApp@1"
+    hst: mysql.telugudevops.online"
+    user: "root"
+  tasks:
+    - name: "download mysql server"
+      ansible.builtin.command: " dnf install mysql-server -y "
+
+    - name: "starting and enabling the service"
+      ansible.builtin.command: " systemctl start mysqld "
+
+    - name: "enabling the mysql server"
+      ansible.builtin.command: " systemctl enable mysqld "
+
+    - name: installing the required packages
+      ansible.builtin.pip:
+        name:
+        - PyMySQL
+    
+    - name: "login into mysql server "
+      community.mysql.mysql_info:
+        login_user: "{{ user }}"
+        login_password: "{{ password }}"
+        login_host: "{{ hst }}"
+      ignore_errors: true
+      register: mysql_ansi
+    
+    - name: printing the mysql information
+      ansible.builtin.debug:
+        msg : "{{ mysql_ansi }}"
+
+    - name: "setting the password and the user"
+      ansible.builtin.command: " mysql_secure_installation --set-{{ user }}-pass {{ password }}"
+      when: mysql_ansi.failed is true

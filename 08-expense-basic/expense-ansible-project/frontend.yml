@@ -1,0 +1,45 @@
+- name: " ansible playbook for frontend "
+  hosts: frontend
+  become: yes
+  tasks: 
+    - name: " nginx installation "
+      ansible.builtin.package: 
+        name: 
+         - nginx
+        state: present
+    
+    - name : " starting and enabling "
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: removing previous nginx directory
+      ansible.builtin.file:
+        path: /usr/share/nginx/html
+        state: absent
+
+    - name: creating new nginx directory
+      ansible.builtin.file:
+        path: /usr/share/nginx/html
+        state: directory
+    
+    - name: " downloading the frontend files " 
+      ansible.builtin.get_url:
+        url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+        dest: /tmp/frontend.zip
+
+    - name: Unarchive a file that is already on the remote machine
+      ansible.builtin.unarchive:
+       src: /tmp/frontend.zip
+       dest: /usr/share/nginx/html
+       remote_src: yes
+    
+    - name: copying the expense.conf file
+      ansible.builtin.copy:
+        src: expense.conf
+        dest: /etc/nginx/default.d/expense.conf
+
+    - name: systemctl command
+      ansible.builtin.command: " systemctl restart nginx "
+
